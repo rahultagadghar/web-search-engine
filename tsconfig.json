@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist",
+    "lib": [
+      "DOM",
+      "ES6"
+    ],
+    "strict": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true
+  }
+}
