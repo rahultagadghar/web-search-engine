@@ -1,3 +1,5 @@
+import { operations } from "./elastic";
+
 const puppeteer = require('puppeteer');
 const visited = [];
 const content = [];
@@ -9,7 +11,7 @@ const startSpider = async (url = [], depthLevel = 1) => {
     while (length) {
         await bruteForce(url[--length], 0)
     }
-    console.log('content', content)
+    // console.log('content', content)
     async function bruteForce(url, levels) {
         if (!url || levels === depthLevel) {
             return
@@ -31,7 +33,11 @@ const startSpider = async (url = [], depthLevel = 1) => {
 
         const allUrlsFromWebpage = await page.evaluate(() => eval(`[...document.links].map(o => o.href)`));
 
+        const result = await operations(<any>{ url, body: bodyAsText })
         content.push({ url, body: bodyAsText })
+        // console.log("Debugging", content.map(r => r.url))
+        // console.log("DebuggingInLenght", content.length)
+
 
         let l = allUrlsFromWebpage.length
 
@@ -45,6 +51,7 @@ const startSpider = async (url = [], depthLevel = 1) => {
 
 }
 
-const listOfUrls = ["http://example.com", "http://imrahul.herokuapp.com/"];
+const listOfUrls = ["http://example.webscraping.com/"];
+// const listOfUrls = ["http://example.com", "http://imrahul.herokuapp.com/"];
 
-startSpider(listOfUrls, 1)
+startSpider(listOfUrls, 3).then(() => console.log("crawling completed"))

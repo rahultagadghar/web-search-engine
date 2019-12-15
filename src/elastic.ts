@@ -2,20 +2,21 @@ import elasticsearch from 'elasticsearch'
 import uniqid from 'uniqid'
 const indexName = 'my-search-db'
 const typeName = "_doc"
-const host = "localhost:9200" 
+const host = "localhost:9200"
 
 const client = new elasticsearch.Client({
     host,
     log: 'trace',
     apiVersion: '7.x',
 });
-const operations = async () => {
-    try {
-        const payload: any = {
-            url: "yahoo.com",
-            body: "true0"
-        }
+class Payload {
+    url: string;
+    body: string
+}
 
+export const operations = async (payload: Payload) => {
+    try {
+        console.log("payload", payload)
         const result = await getSpecificDoc(payload.url)
 
         if (!result) {
@@ -26,7 +27,6 @@ const operations = async () => {
 
     } catch (error) {
         console.log("Error generated", error);
-
     }
 }
 async function getSpecificDoc(urlToFind) {
@@ -35,7 +35,7 @@ async function getSpecificDoc(urlToFind) {
         type: typeName,
         body: {
             query: {
-                match: {
+                term: {
                     url: urlToFind
                 }
             }
@@ -63,5 +63,3 @@ async function update(id, doc) {
         }
     });
 }
-
-operations()
