@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const visited = [];
 const content = [];
 const startSpider = async (url = [], depthLevel = 1) => {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     let length = url.length
 
@@ -29,7 +29,7 @@ const startSpider = async (url = [], depthLevel = 1) => {
 
         const bodyAsText = await page.evaluate(() => document.body.textContent.replace(/\n|\r/g, "").trim())
 
-        const allUrlsFromWebpage = await page.evaluate(() => [...document.links].map(o => o.href));
+        const allUrlsFromWebpage = await page.evaluate(() => eval(`[...document.links].map(o => o.href)`));
 
         content.push({ url, body: bodyAsText })
 
