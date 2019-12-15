@@ -52,7 +52,12 @@ export async function webSearch(textToSearch) {
         type: typeName,
         body: {
             query: {
-                term: { body: textToSearch }
+                match: {
+                    body: {
+                        query: textToSearch,
+                        operator: "or"
+                    }
+                }
             }
         }
     })
