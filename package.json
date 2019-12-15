@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && node dist/index.js",
+    "start": "tsc && node dist/search-engine/index.js",
     "dev": "nodemon src/search-engine/index.ts",
-    "crawl" : "nodemon src/web-crawler/web-crawler.ts"
+    "crawl": "nodemon src/web-crawler/web-crawler.ts"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

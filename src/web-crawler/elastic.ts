@@ -29,6 +29,9 @@ export const operations = async (payload: Payload) => {
         console.log("Error generated", error);
     }
 }
+
+
+
 async function getSpecificDoc(urlToFind) {
     const result = await client.search({
         index: indexName,
@@ -42,6 +45,18 @@ async function getSpecificDoc(urlToFind) {
         }
     })
     return result.hits.hits.length ? result.hits.hits[0] : null
+}
+export async function webSearch(textToSearch) {
+    const result = await client.search({
+        index: indexName,
+        type: typeName,
+        body: {
+            query: {
+                term: { body: textToSearch }
+            }
+        }
+    })
+    return result.hits.hits.length ? result.hits.hits : null
 }
 
 async function save(body: object) {
