@@ -4,10 +4,17 @@
     "outDir": "dist",
     "lib": [
       "DOM",
+      "dom",
       "ES6"
     ],
+    "target": "es5",
     "strict": false,
     "esModuleInterop": true,
-    "experimentalDecorators": true
-  }
+    "sourceMap": true,
+    "experimentalDecorators": true,
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

@@ -51,7 +51,7 @@ const startSpider = async (url = [], depthLevel = 1) => {
 
 }
 
-const listOfUrls = ["http://example.webscraping.com/"];
-// const listOfUrls = ["http://example.com", "http://imrahul.herokuapp.com/"];
+// const listOfUrls = [];
+const listOfUrls = ["http://example.com", "http://imrahul.herokuapp.com/"];
 
 startSpider(listOfUrls, 3).then(() => console.log("crawling completed"))
